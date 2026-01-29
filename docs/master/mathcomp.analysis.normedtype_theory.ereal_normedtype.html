@@ -93,6 +93,7 @@
 <li><a href="mathcomp.analysis.topology_theory.connected.html">connected</a></li>
 <li><a href="mathcomp.analysis.topology_theory.discrete_topology.html">discrete_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.matrix_topology.html">matrix_topology</a></li>
+<li><a href="mathcomp.analysis.topology_theory.metric_structure.html">metric_structure</a></li>
 <li><a href="mathcomp.analysis.topology_theory.nat_topology.html">nat_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.num_topology.html">num_topology</a></li>
 <li><a href="mathcomp.analysis.topology_theory.one_point_compactification.html">one_point_compactification</a></li>
@@ -288,7 +289,8 @@ forall [T : choiceType] [X : filter.Filtered.type T]
   [R : realFieldType] (f : filter.Filtered.sort X -> \bar R)
   (F : set (set (filter.Filtered.sort X))),
 limf_esup (T:=T) (X:=X) (R:=R) f F =
-ereal_inf (R:=R) [set ereal_sup (R:=R) [set f x | x in V] | V in F]
+ereal.ereal_inf (R:=R)
+  [set ereal.ereal_sup (R:=R) [set f x | x in V] | V in F]
 
 limf_esupE is not universe polymorphic
 Arguments limf_esupE [T X R] f%function_scope F%classical_set_scope
@@ -309,7 +311,8 @@ forall [T : choiceType] [X : filter.Filtered.type T]
   [R : realFieldType] (f : filter.Filtered.sort X -> \bar R)
   (F : set (set (filter.Filtered.sort X))),
 limf_einf (T:=T) (X:=X) (R:=R) f F =
-ereal_sup (R:=R) [set ereal_inf (R:=R) [set f x | x in V] | V in F]
+ereal.ereal_sup (R:=R)
+  [set ereal.ereal_inf (R:=R) [set f x | x in V] | V in F]
 
 limf_einfE is not universe polymorphic
 Arguments limf_einfE [T X R] f%function_scope F%classical_set_scope
@@ -1190,7 +1193,7 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="open_ereal_lt'" class="id"><a name="open_ereal_lt'" class="" title="open_ereal_lt' :
 forall [R : realFieldType] [x y : \bar R],
-(x < y)%E -> ereal_nbhs x (fun u : \bar R => (u < y)%E)
+(x < y)%E -> ereal.ereal_nbhs x (fun u : \bar R => (u < y)%E)
 
 open_ereal_lt' is not universe polymorphic
 Arguments open_ereal_lt' [R] [x y]%ereal_scope _
@@ -1213,7 +1216,7 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="open_ereal_gt'" class="id"><a name="open_ereal_gt'" class="" title="open_ereal_gt' :
 forall [R : realFieldType] [x y : \bar R],
-(y < x)%E -> ereal_nbhs x (fun u : \bar R => (y < u)%E)
+(y < x)%E -> ereal.ereal_nbhs x (fun u : \bar R => (y < u)%E)
 
 open_ereal_gt' is not universe polymorphic
 Arguments open_ereal_gt' [R] [x y]%ereal_scope _
@@ -1330,7 +1333,7 @@ Expanded type for implicit arguments
 closed_ereal_le_ereal :
 forall [R : realFieldType] [y : \bar R]
   [t : topology_structure.Topological.sort
-         (constructive_ereal_extended__canonical__topology_structure_Topological
+         (ereal.constructive_ereal_extended__canonical__topology_structure_Topological
             R)],
 topology_structure.closure [set x | (y <= x)%E] t -> (y <= t)%E = true
 
@@ -1358,7 +1361,7 @@ Expanded type for implicit arguments
 closed_ereal_ge_ereal :
 forall [R : realFieldType] [y : \bar R]
   [t : topology_structure.Topological.sort
-         (constructive_ereal_extended__canonical__topology_structure_Topological
+         (ereal.constructive_ereal_extended__canonical__topology_structure_Topological
             R)],
 topology_structure.closure [set x | (x <= y)%E] t -> (t <= y)%E = true
 
@@ -1541,7 +1544,7 @@ forall {T : Type} {a : filter.set_system T},
 filter.ProperFilter a ->
 forall {R : realFieldType} [f : T -> \bar R] [b : \bar R]
   [c : filter.Filtered.sort
-         constructive_ereal_extended__canonical__filter_Filtered],
+         ereal.constructive_ereal_extended__canonical__filter_Filtered],
 filter.cvg_to (filter.nbhs (filter.fmap f (filter.nbhs a))) (filter.nbhs c) ->
 filter.prop_near1 a (P:=fun a0 : T => (b <= f a0)%E)
   (inPhantom (forall a0 : T, (b <= f a0)%E)) ->
@@ -1567,7 +1570,7 @@ forall {T : Type} {a : filter.set_system T},
 filter.ProperFilter a ->
 forall {R : realFieldType} [f : T -> \bar R] [b : \bar R]
   [c : filter.Filtered.sort
-         constructive_ereal_extended__canonical__filter_Filtered],
+         ereal.constructive_ereal_extended__canonical__filter_Filtered],
 filter.cvg_to (filter.nbhs (filter.fmap f (filter.nbhs a))) (filter.nbhs c) ->
 filter.prop_near1 a (P:=fun a0 : T => (f a0 <= b)%E)
   (inPhantom (forall a0 : T, (f a0 <= b)%E)) ->
@@ -1751,7 +1754,7 @@ Qed.</div></details>
 &nbsp;&nbsp;<span class="id">+</span><span class="id"> case=&gt;</span><span class="id"> M</span><span class="id"> [Mreal</span><span class="id"> MA]</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">exists</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#f7d0eaaef362bfb530a5cbf036db1453">`]-oo,</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#f7d0eaaef362bfb530a5cbf036db1453"> </a></span><span class="id">M</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#bc34d0712444fb7fddc80987d6cdcb61">%:E</a></span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#f7d0eaaef362bfb530a5cbf036db1453">[</a></span><span class="id"> =&gt;</span><span class="id"> [|y/=];</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#in_itv">in_itv</a></span><span class="id">/=</span><span class="id"> ?</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ltNyr">ltNyr</a></span><span class="id">;</span><span class="id"> last</span><span class="id"> exact:</span><span class="id"> MA</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span><span class="id"> split</span><span class="id"> =&gt;</span><span class="id"> //;</span><span class="id"> left</span>.<br/>
-<span class="id">-</span><span class="id"> move=&gt;</span><span class="id"> [[</span><span class="id"> [[]/=</span><span class="id"> r|[]]</span><span class="id"> [[]/=</span><span class="id"> s|[]]</span><span class="id"> ]]</span><span class="id"> []</span><span class="id"> []//</span><span class="id"> _</span>.<br/>
+<span class="id">-</span><span class="id"> move=&gt;</span><span class="id"> [[</span><span class="id"> [[]/=</span><span class="id"> r|[]]</span><span class="id"> [[]/=</span><span class="id"> s|[]]</span><span class="id"> ]][]//</span><span class="id"> _</span>.<br/>
 &nbsp;&nbsp;<span class="id">+</span><span class="id"> move=&gt;</span><span class="id"> /</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssreflect.html#a686f16c7fee28a2e0daca8726c6780b">[dup]</a></span><span class="id">/</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#ltgte_fin_num">ltgte_fin_num</a></span><span class="id">/</span><span class="id"><a href="mathcomp.reals.constructive_ereal.html#fineK">fineK</a></span><span class="id"> &lt;-;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#in_itv">in_itv</a></span><span class="id">/=</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id">move=&gt;</span><span class="id"> /</span><span class="id"><a href="https://rocq-prover.org/corelib/Corelib.ssr.ssrbool.html#andP">andP</a></span><span class="id">[rx</span><span class="id"> sx]</span><span class="id"> rsA;</span><span class="id"> apply:</span> (<span class="id"><a href="mathcomp.analysis.ereal.html#nbhs_interval">nbhs_interval</a></span><span class="id"> rx</span><span class="id"> sx</span>)<span class="id"> =&gt;</span><span class="id"> z</span><span class="id"> rz</span><span class="id"> zs</span>.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="gallina-kwd">by</span><span class="id"> apply:</span><span class="id"> rsA</span><span class="id"> =&gt;/=;</span><span class="id"> rewrite</span><span class="id"> </span><span class="id"><a href="https://math-comp.github.io/htmldoc_2_4_0/mathcomp.algebra.interval.html#in_itv">in_itv</a></span><span class="id">/=</span><span class="id"> rz</span>.<br/>
