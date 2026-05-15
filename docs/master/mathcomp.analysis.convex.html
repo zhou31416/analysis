@@ -660,7 +660,7 @@ Qed.</div></details>
 <br/>
 <span class="vernacular">Lemma</span><span class="id"> </span><span id="convRE" class="id"><a name="convRE" class="" title="convRE :
 forall {R : numDomainType} (a b : R^o) (t : {i01 R}),
-conv t a b = ((t%:num * a)%R + ((t%:num).~ * b)%R)%E
+conv t a b = ((t%:num * a)%R + (unstable.onem t%:num * b)%R)%E
 
 convRE is not universe polymorphic
 Arguments convRE {R} a b t
